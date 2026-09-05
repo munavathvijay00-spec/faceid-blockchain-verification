@@ -18,7 +18,7 @@ from src.face_processor import FaceDetector, FaceEncoder
 from src.search import ReverseImageSearchEngine
 from src.blockchain import AttestationBuilder, EVMBlockchainRecorder
 
-PORT = int(os.getenv("PORT", 5000))
+PORT = int(os.getenv("PORT", 8080))
 HOST = "127.0.0.1"
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -601,8 +601,11 @@ class PipelineRequestHandler(BaseHTTPRequestHandler):
         if path == "/" or path == "/index.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            encoded_html = HTML_TEMPLATE.encode("utf-8")
+            self.send_header("Content-Length", str(len(encoded_html)))
             self.end_headers()
-            self.wfile.write(HTML_TEMPLATE.encode("utf-8"))
+            if self.command != "HEAD":
+                self.wfile.write(encoded_html)
             return
 
         # Serve output images

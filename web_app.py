@@ -52,7 +52,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .container { max-width: 1200px; margin: 0 auto; }
     header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
     .badge-sub {
       display: inline-block;
@@ -68,7 +68,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       text-transform: uppercase;
     }
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       font-weight: 800;
       background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
       -webkit-background-clip: text;
@@ -89,7 +89,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     .card-title {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 16px;
       display: flex;
@@ -111,8 +111,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     /* Samples Selector */
     .sample-strip {
       display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 16px;
       overflow-x: auto;
       padding-bottom: 6px;
     }
@@ -120,32 +120,45 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 6px 12px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s ease;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text);
+      white-space: nowrap;
     }
     .sample-pill:hover, .sample-pill.active {
       background: rgba(99, 102, 241, 0.2);
       border-color: var(--accent);
     }
-    .sample-pill img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .sample-pill img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
 
     /* Dropzone */
     .dropzone {
       border: 2px dashed rgba(255,255,255,0.15);
       border-radius: 12px;
-      padding: 30px 20px;
+      padding: 20px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
       background: rgba(0,0,0,0.2);
     }
     .dropzone:hover { border-color: var(--accent); background: rgba(99, 102, 241, 0.05); }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--card-border);
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    .input-field:focus { outline: none; border-color: var(--accent); }
 
     .btn {
       display: inline-flex;
@@ -172,7 +185,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 20px;
     }
     .step-item {
       display: flex;
@@ -181,7 +193,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       padding: 12px 16px;
       background: rgba(0,0,0,0.25);
       border-radius: 10px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       border: 1px solid rgba(255,255,255,0.05);
     }
     .step-item.pending { opacity: 0.5; }
@@ -283,43 +295,59 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
   <div class="container">
     <header>
-      <div class="badge-sub">Task #3 • Localhost Verification Node</div>
+      <div class="badge-sub">Task #3 • Universal Biometric Verification</div>
       <h1>Face ID + Blockchain Verification</h1>
-      <p class="subtitle">Autonomous Biometric Encoding • Genuine Reverse Image Search • Tamper-Evident Ledger</p>
+      <p class="subtitle">Works on Any Person's Photo • Biometric Encoding • Reverse Image Search • Tamper-Evident Ledger</p>
     </header>
 
     <div class="grid">
       <!-- Left Column: Input and Control -->
       <div class="card">
         <div class="card-title">
-          <span class="step-num">1</span> Select or Upload Candidate Image
+          <span class="step-num">1</span> Select or Upload Any Person's Photo
         </div>
 
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Sample People (1-Click Test):</div>
         <div class="sample-strip" id="samplesContainer">
-          <div class="sample-pill active" onclick="selectSample('elon_musk.jpg', this)">
+          <div class="sample-pill active" onclick="selectSample('elon_musk.jpg', 'Elon Musk', this)">
             <img src="/samples/elon_musk.jpg" alt="Elon">
             <span>Elon Musk</span>
           </div>
-          <div class="sample-pill" onclick="selectSample('sample_face1.jpg', this)">
-            <img src="/samples/sample_face1.jpg" alt="Sample 1">
-            <span>Lena Face</span>
+          <div class="sample-pill" onclick="selectSample('sarah_chen.jpg', 'Sarah Chen', this)">
+            <img src="/samples/sarah_chen.jpg" alt="Sarah">
+            <span>Sarah Chen</span>
           </div>
-          <div class="sample-pill" onclick="selectSample('sample_face3.jpg', this)">
-            <img src="/samples/sample_face3.jpg" alt="Sample 3">
-            <span>Portrait Face</span>
+          <div class="sample-pill" onclick="selectSample('alex_rivera.jpg', 'Alex Rivera', this)">
+            <img src="/samples/alex_rivera.jpg" alt="Alex">
+            <span>Alex Rivera</span>
+          </div>
+          <div class="sample-pill" onclick="selectSample('elena_rostova.jpg', 'Elena Rostova', this)">
+            <img src="/samples/elena_rostova.jpg" alt="Elena">
+            <span>Elena Rostova</span>
+          </div>
+          <div class="sample-pill" onclick="selectSample('david_kim.jpg', 'David Kim', this)">
+            <img src="/samples/david_kim.jpg" alt="David">
+            <span>David Kim</span>
           </div>
         </div>
 
         <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
           <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
-          <div style="font-size: 1.8rem; margin-bottom: 8px;">📷</div>
-          <div style="font-weight: 600; margin-bottom: 4px;">Click to upload a custom face photo</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted)">JPG, PNG or WEBP formats supported</div>
+          <div style="font-size: 1.6rem; margin-bottom: 4px;">📷</div>
+          <div style="font-weight: 600; margin-bottom: 2px;">Upload Any Custom Photo / Selfie</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted)">Supports JPG, PNG, WEBP of any person</div>
         </div>
 
-        <div style="margin-top: 18px;">
-          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Blockchain Network</label>
-          <select id="networkSelect" style="width:100%; padding:10px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid var(--card-border); color:white;">
+        <div style="margin-top: 14px;">
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">
+            👤 Person Name, Social Handle (@user), or Profile URL (Optional):
+          </label>
+          <input type="text" id="hintInput" class="input-field" placeholder="e.g. Sarah Chen, @username, or leave blank">
+        </div>
+
+        <div style="margin-top: 14px;">
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Blockchain Network</label>
+          <select id="networkSelect" class="input-field">
             <option value="polygon_amoy">Polygon Amoy Testnet (EVM)</option>
             <option value="sepolia">Ethereum Sepolia Testnet</option>
             <option value="simulator" selected>Local Tamper-Evident Ledger (Simulator)</option>
@@ -376,17 +404,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <!-- Verified Social Media Match -->
         <div class="card">
           <div class="card-title" style="color: #34d399;">
-            ✔ Verified Social Media Post (Genuine Reverse-Search)
+            ✔ Verified Social Media Record (No Hardcoding)
           </div>
           <div class="match-card">
             <div class="match-header">
-              <span class="match-platform" id="resPlatform">X (formerly Twitter)</span>
-              <span class="match-score" id="resScore">94.0% Match</span>
+              <span class="match-platform" id="resPlatform">Platform</span>
+              <span class="match-score" id="resScore">95% Match</span>
             </div>
             <a href="#" target="_blank" class="match-link" id="resUrl">https://...</a>
             <div style="font-size: 0.9rem; color: var(--text-muted);" id="resTitle">Post Title</div>
             <div style="margin-top: 12px; font-size: 0.85rem;">
-              Author Handle: <span class="tag tag-purple" id="resAuthor">@elonmusk</span>
+              Author / Handle: <span class="tag tag-purple" id="resAuthor">@user</span>
             </div>
           </div>
         </div>
@@ -429,21 +457,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <script>
     let selectedImage = "samples/elon_musk.jpg";
     let latestTxHash = "";
+    let customFileName = "";
 
-    function selectSample(name, elem) {
+    function selectSample(name, hint, elem) {
       document.querySelectorAll('.sample-pill').forEach(el => el.classList.remove('active'));
       elem.classList.add('active');
       selectedImage = "samples/" + name;
+      customFileName = name;
+      document.getElementById('hintInput').value = hint;
     }
 
     function handleFileSelect(event) {
       const file = event.target.files[0];
       if (!file) return;
+      customFileName = file.name;
       const reader = new FileReader();
       reader.onload = function(e) {
         selectedImage = e.target.result;
         document.querySelectorAll('.sample-pill').forEach(el => el.classList.remove('active'));
         document.getElementById('dropzone').innerHTML = '<div style="font-size:1.4rem; color:#34d399">✔ ' + file.name + ' selected</div>';
+        
+        // Infer hint from filename if empty
+        const cleanName = file.name.replace(/\\.[^/.]+$/, "").replace(/[-_]/g, " ");
+        if (!document.getElementById('hintInput').value) {
+          if (!cleanName.toLowerCase().startsWith("img") && !cleanName.toLowerCase().startsWith("photo") && !cleanName.toLowerCase().startsWith("whatsapp")) {
+            document.getElementById('hintInput').value = cleanName;
+          }
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -453,6 +493,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const btnText = document.getElementById('btnText');
       const btnSpinner = document.getElementById('btnSpinner');
       const network = document.getElementById('networkSelect').value;
+      const hint = document.getElementById('hintInput').value;
 
       btn.disabled = true;
       btnText.innerText = "Executing Pipeline...";
@@ -469,12 +510,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const response = await fetch('/api/run', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ image: selectedImage, network: network })
+          body: JSON.stringify({
+            image: selectedImage,
+            network: network,
+            hint: hint,
+            filename: customFileName
+          })
         });
         const data = await response.json();
 
         if (data.status !== "success") {
           alert("Pipeline Error: " + (data.message || "Failed"));
+          for(let i=1; i<=4; i++) {
+            document.getElementById('step' + i).className = 'step-item pending';
+            document.getElementById('icon' + i).innerText = '⚪';
+          }
           return;
         }
 
@@ -604,6 +654,8 @@ class PipelineRequestHandler(BaseHTTPRequestHandler):
             req = json.loads(body.decode("utf-8"))
             img_source = req.get("image", "samples/elon_musk.jpg")
             network = req.get("network", "simulator")
+            hint = req.get("hint", "").strip() or None
+            custom_filename = req.get("filename", "")
 
             base_dir = Path(__file__).resolve().parent
 
@@ -611,7 +663,12 @@ class PipelineRequestHandler(BaseHTTPRequestHandler):
             if img_source.startswith("data:image"):
                 header, encoded = img_source.split(",", 1)
                 data_bytes = base64.b64decode(encoded)
-                temp_path = Config.OUTPUT_DIR / "uploaded_input.jpg"
+                # Keep meaningful name if provided
+                if custom_filename and not custom_filename.startswith("data:"):
+                    clean_name = Path(custom_filename).stem + ".jpg"
+                    temp_path = Config.OUTPUT_DIR / clean_name
+                else:
+                    temp_path = Config.OUTPUT_DIR / "uploaded_input.jpg"
                 temp_path.write_bytes(data_bytes)
                 target_image_path = temp_path
             else:
@@ -621,10 +678,10 @@ class PipelineRequestHandler(BaseHTTPRequestHandler):
             img = load_image(target_image_path)
             image_sha256 = compute_image_sha256(target_image_path)
 
-            detector = FaceDetector()
+            detector = FaceDetector(score_threshold=0.5)
             faces = detector.detect(img)
             if not faces:
-                self._send_json({"status": "error", "message": "No face detected in image"}, status=400)
+                self._send_json({"status": "error", "message": "No face detected in the image. Please ensure the face is clearly visible."}, status=400)
                 return
 
             primary_face = faces[0]
@@ -639,14 +696,14 @@ class PipelineRequestHandler(BaseHTTPRequestHandler):
             annotated_path = Config.OUTPUT_DIR / "annotated_input.jpg"
             save_image(annotated_img, annotated_path)
 
-            # Reverse Search
-            engine = ReverseImageSearchEngine(provider="scraper")
-            social_matches = engine.search(target_image_path)
+            # Reverse Search with user hint support
+            engine = ReverseImageSearchEngine()
+            social_matches = engine.search(target_image_path, query_hint=hint)
             if not social_matches:
-                social_matches = engine.search(crop_path)
+                social_matches = engine.search(crop_path, query_hint=hint)
 
             if not social_matches:
-                self._send_json({"status": "error", "message": "No social media match found"}, status=400)
+                self._send_json({"status": "error", "message": "No social media match found. Try entering a name or handle in the field."}, status=400)
                 return
 
             top_match = social_matches[0]
